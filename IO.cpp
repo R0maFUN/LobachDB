@@ -3,25 +3,15 @@
 
 enum KEYS {
 	name,
-	group,
 	phone,
-	lessonName,
-	teacherName,
-	teacherEmail,
-	date,
-	mark
+	email,
+	salary,
+	managerName,
+	managerPhone,
+	date
 };
 
-vector<string> keys = {
-	"name",
-	"group",
-	"phone",
-	"lessonName",
-	"teachername",
-	"teacherEmail",
-	"date",
-	"mark"
-};
+
 
 int StringToInt(string str) // conversation string to integer
 {
@@ -73,8 +63,7 @@ bool isCorrect(string str, int type)
 	string buf;
 	switch (type) {
 	case name:
-	case lessonName:
-	case teacherName:
+	case managerName:
 		while (str[i] != '\0')
 		{
 			if (!isalpha(str[i]))
@@ -82,9 +71,9 @@ bool isCorrect(string str, int type)
 			++i;
 		}
 		break;
-	case group:
+	case managerPhone:
 	case phone:
-	case mark:
+	case salary:
 		while (str[i] != '\0')
 		{
 			if (!isdigit(str[i]))
@@ -92,7 +81,7 @@ bool isCorrect(string str, int type)
 			++i;
 		}
 		break;
-	case teacherEmail:
+	case email:
 		while (str[i] != '@' && str[i]!='\0')
 		{
 			if (!isalpha(str[i]) && !isdigit(str[i]) && str[i] != '.')
@@ -194,23 +183,29 @@ vector<string> * ParseFile(string filename)
 	{
 		if (isCorrectString(line))
 			result->push_back(line);
+		else
+		{
+			cout << "Wrong input" << endl;
+			return NULL;
+		}
 	}
 	return result;
 }
 
-void PrintStudent(STUDENT* student)
+void PrintElement(ELEMENT* el)
 {
-	cout << student->name << " " << student->group << " " << student->phone << " " << student->lessonName << " " << student->teacherName << " " << student->teacherEmail << " " << student->date << " " << student->mark << endl;
+	cout << el->name << ' ' << el->phone << ' ' << el->email << ' ' << el->salary << ' ' << el->managerName << ' ' << el->managerPhone << ' ' << el->date << ' ' << endl;
+	//cout << element->name << " " << element->group << " " << element->phone << " " << element->lessonName << " " << element->teacherName << " " << element->teacherEmail << " " << element->date << " " << element->mark << endl;
 
 }
 
-void PrintIntoFile(string filename , vector<STUDENT*>* students)
+void PrintIntoFile(string filename , vector<ELEMENT*>* elements)
 {
 	fstream out(filename);
-	for (int i = 0; i < students->size(); ++i)
+	for (int i = 0; i < elements->size(); ++i)
 	{
-		STUDENT* student = (*students)[i];
-		out << student->name << " " << student->group << " " << student->phone << " " << student->lessonName << " " << student->teacherName << " " << student->teacherEmail << " " << student->date << " " << student->mark << endl;
+		ELEMENT* element = (*elements)[i];
+		out << element->name << " " << element->phone << " " << element->salary << " " << element->managerName << " " << element->managerPhone << " " << element->date << endl;
 	}
 	out.close();
 }

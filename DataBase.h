@@ -3,30 +3,37 @@
 #include <vector>
 using namespace std;
 
-struct STUDENT {
+struct ELEMENT {
+
 	string name;
-	int group;
 	string phone;
-	string lessonName;
-	string teacherName;
-	string teacherEmail;
+	string email;
+	int salary;
+	string managerName;
+	string managerPhone;
 	string date;
-	int mark;
+
 };
 
-STUDENT* InitStudent(string Data);
-void AddStudent(vector<STUDENT*>* students);
-void DeleteStudentByName(vector<STUDENT*>* students, string name);
+ELEMENT* InitElement(string Data);
+void AddElement(vector<ELEMENT*>* elements);
 
-void DeleteStudentByPhone(vector<STUDENT*>* students, string phone);
+//template <typename T>
+//void ChangeSmthByName(vector<ELEMENT*>* elements, string name, T newVal);
 
-void ChangePhoneByName(vector<STUDENT*>* students, string name, string newPhone);
+void DeleteElementByName(vector<ELEMENT*>* elements, string name);
 
-void ChangeGroupByName(vector<STUDENT*>* students, string name, int newGroup);
+void DeleteElementByPhone(vector<ELEMENT*>* elements, string phone);
 
-void ChangeMarkByName(vector<STUDENT*>* students, string name, int newMark);
+void ChangePhoneByName(vector<ELEMENT*>* elements, string name, string newPhone);
 
-STUDENT* FindStudentByName(vector<STUDENT*>* students, string name);
+void ChangeEmailByName(vector<ELEMENT*>* elements, string name, string newEmail);
 
-bool WayToSort(STUDENT* a, STUDENT* b);
-void SortByName(vector<STUDENT*>* students);
+void ChangeSalaryByName(vector<ELEMENT*>* elements, string name, int newSalary);
+
+void ChangeManagerByName(vector<ELEMENT*>* elements, string name, string newManager);
+
+ELEMENT* FindStudentByName(vector<ELEMENT*>* elements, string name);
+
+bool WayToSort(ELEMENT* a, ELEMENT* b);
+void SortByName(vector<ELEMENT*>* elements);

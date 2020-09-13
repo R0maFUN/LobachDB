@@ -5,103 +5,91 @@
 
 enum KEYS {
 	name,
-	group,
 	phone,
-	lessonName,
-	teacherName,
-	teacherEmail,
-	date,
-	mark
+	email,
+	salary,
+	managerName,
+	managerPhone,
+	date
 };
 
-STUDENT* InitStudent(string Data)
+ELEMENT* InitElement(string Data)
 {
-	STUDENT* p = new STUDENT;
+	ELEMENT* p = new ELEMENT;
 	vector<string> * parsed = ParseString(Data);
 	p->name = (*parsed)[name];
-	p->group = StringToInt((*parsed)[group]) ;
 	p->phone = (*parsed)[phone];
-	p->lessonName = (*parsed)[lessonName];
-	p->teacherName = (*parsed)[teacherName];
-	p->teacherEmail = (*parsed)[teacherEmail];
+	p->email = (*parsed)[email];
+	p->salary = StringToInt((*parsed)[salary]);
+	p->managerName = (*parsed)[managerName];
+	p->managerPhone = (*parsed)[managerPhone];
 	p->date = (*parsed)[date];
-	p->mark = StringToInt((*parsed)[mark]) ;
 	return p;
 }
 
-void AddStudent(vector<STUDENT*> * students)
+void AddElement(vector<ELEMENT*> * elements)
 {
 	string inp;
-	cout << "Enter the data about student" << endl;
+	cout << "Enter the data about element" << endl;
 	cin.get();
 	getline(cin, inp);
 	// isCorrect();
-	STUDENT* p = InitStudent(inp);
-	students->push_back(p);
+	ELEMENT* p = InitElement(inp);
+	elements->push_back(p);
 }
 
-void DeleteStudentByName(vector<STUDENT*>* students , string name)
+void DeleteElementByName(vector<ELEMENT*>* elements , string name)
 {
-	for (int i = 0; i < students->size(); ++i)
-		if ((*students)[i]->name == name)
+	for (int i = 0; i < elements->size(); ++i)
+		if ((*elements)[i]->name == name)
 		{
-			students->erase(students->begin() + i);
+			elements->erase(elements->begin() + i);
 			return;
 		}
 }
 
-void DeleteStudentByPhone(vector<STUDENT*>* students, string phone)
+void DeleteElementByPhone(vector<ELEMENT*>* elements, string phone)
 {
-	for (int i = 0; i < students->size(); ++i)
-		if ((*students)[i]->phone == phone)
+	for (int i = 0; i < elements->size(); ++i)
+		if ((*elements)[i]->phone == phone)
 		{
-			students->erase(students->begin() + i);
+			elements->erase(elements->begin() + i);
 			return;
 		}
 }
 
-void ChangePhoneByName(vector<STUDENT*>* students, string name , string newPhone)
+void ChangePhoneByName(vector<ELEMENT*>* elements, string name , string newPhone)
 {
-	for (int i = 0; i < students->size(); ++i)
-		if ((*students)[i]->name == name)
-		{
-			(*students)[i]->phone = newPhone;
-			return;
-		}
+	FindStudentByName(elements, name)->phone = newPhone;
 }
 
-void ChangeGroupByName(vector<STUDENT*>* students, string name, int newGroup)
+void ChangeEmailByName(vector<ELEMENT*>* elements, string name, string newEmail)
 {
-	for (int i = 0; i < students->size(); ++i)
-		if ((*students)[i]->name == name)
-		{
-			(*students)[i]->group = newGroup;
-			return;
-		}
+	FindStudentByName(elements, name)->email = newEmail;
 }
 
-void ChangeMarkByName(vector<STUDENT*>* students, string name, int newMark)
+void ChangeSalaryByName(vector<ELEMENT*>* elements, string name, int newSalary)
 {
-	for (int i = 0; i < students->size(); ++i)
-		if ((*students)[i]->name == name)
-		{
-			(*students)[i]->mark = newMark;
-			return;
-		}
+	FindStudentByName(elements, name)->salary = newSalary;
 }
 
-STUDENT * FindStudentByName(vector<STUDENT*>* students, string name)
+void ChangeManagerByName(vector<ELEMENT*>* elements, string name, string newManager)
 {
-	for (int i = 0; i < students->size(); ++i)
-		if ((*students)[i]->name == name)
-			return (*students)[i];
+	FindStudentByName(elements, name)->managerName = newManager;
 }
 
-bool WayToSort(STUDENT* a, STUDENT* b)
+ELEMENT * FindStudentByName(vector<ELEMENT*>* elements, string name)
+{
+	for (int i = 0; i < elements->size(); ++i)
+		if ((*elements)[i]->name == name)
+			return (*elements)[i];
+}
+
+bool WayToSort(ELEMENT* a, ELEMENT* b)
 {
 	return a->name < b->name;
 }
-void SortByName(vector<STUDENT*>* students)
+void SortByName(vector<ELEMENT*>* elements)
 {
-	sort(students->begin(), students->end(), WayToSort);
+	sort(elements->begin(), elements->end(), WayToSort);
 }

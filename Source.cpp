@@ -14,54 +14,56 @@ int main()
 	string filename;
 	cin >> filename;
 	vector<string> * Data = ParseFile(filename);
+	if (!Data)
+		return 0;
 
-	vector<STUDENT*> Students;
+	vector<ELEMENT*> AllElements;
 	for (int i = 0; i < Data->size(); ++i)
 	{
-		STUDENT* test = InitStudent((*Data)[i]);
-		Students.push_back(test);
+		ELEMENT* test = InitElement((*Data)[i]);
+		AllElements.push_back(test);
 	}
 
-	for (int i = 0; i < Students.size(); ++i)
-		PrintStudent(Students[i]);
+	for (int i = 0; i < AllElements.size(); ++i)
+		PrintElement(AllElements[i]);
 
 	int a;
 	cin >> a;
 	system("cls");
-	AddStudent(&Students);
-	PrintIntoFile(filename, &Students);
+	AddElement(&AllElements);
+	PrintIntoFile(filename, &AllElements);
 
-	for (int i = 0; i < Students.size(); ++i)
-		PrintStudent(Students[i]);
+	for (int i = 0; i < AllElements.size(); ++i)
+		PrintElement(AllElements[i]);
 	string name;
 	cout << "Enter the name to delete" << endl;
 	cin >> name;
 	system("cls");
-	DeleteStudentByName(&Students, name);
+	DeleteElementByName(&AllElements, name);
 
-	for (int i = 0; i < Students.size(); ++i)
-		PrintStudent(Students[i]);
+	for (int i = 0; i < AllElements.size(); ++i)
+		PrintElement(AllElements[i]);
 
-	cout << "Enter the name to change mark" << endl;
+	cout << "Enter the name to change phone" << endl;
 	cin >> name;
 	system("cls");
-	ChangeMarkByName(&Students, name, 10);
-	for (int i = 0; i < Students.size(); ++i)
-		PrintStudent(Students[i]);
+	ChangePhoneByName(&AllElements, name, string("70000000000"));
+	for (int i = 0; i < AllElements.size(); ++i)
+		PrintElement(AllElements[i]);
 
-	cout << "Enter the name to find student" << endl;
+	cout << "Enter the name to find element" << endl;
 	cin >> name;
 	system("cls");
-	STUDENT* student = FindStudentByName(&Students, name);
+	ELEMENT* element = FindStudentByName(&AllElements, name);
 
-	PrintStudent(student);
+	PrintElement(element);
 
 	cout << "Enter something to sort table by name" << endl;
 	cin >> name;
 	system("cls");
-	SortByName(&Students);
-	for (int i = 0; i < Students.size(); ++i)
-		PrintStudent(Students[i]);
+	SortByName(&AllElements);
+	for (int i = 0; i < AllElements.size(); ++i)
+		PrintElement(AllElements[i]);
 
 
 
